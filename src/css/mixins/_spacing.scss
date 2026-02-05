@@ -1,0 +1,16 @@
+@use '@css/mixins/_v-spacing' as *;
+
+@mixin default-side-padding() {
+	@include v-spacing(padding-left, var(--grid-margin), var(--grid-margin));
+	@include v-spacing(padding-right, var(--grid-margin), var(--grid-margin));
+}
+
+@mixin default-vertcial-padding() {
+	@include v-spacing(padding-top, 50px, 70px);
+	@include v-spacing(padding-bottom, 50px, 70px);
+}
+
+@mixin default-side-margin() {
+	@include v-spacing(margin-left, var(--grid-margin), var(--grid-margin));
+	@include v-spacing(margin-right, var(--grid-margin), var(--grid-margin));
+}

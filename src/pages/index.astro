@@ -1,0 +1,19 @@
+---
+import CImage from '@components/c-Image/index.astro';
+import SExample from '@sections/s-Example/index.astro';
+import Layout from '@layouts/layout.astro';
+
+import testImage from '@images/test2.jpg';
+
+const title = "nine:am"
+const description = "An opinionated framework for Astro."
+---
+
+<Layout title={title} description={description}>
+	<CImage src={testImage} />
+	<SExample title="Home">
+		<p>
+        	The morning light spilled softly across the table, tracing warm lines through the steam of a half-finished coffee. Outside, the street hummed to life with the rhythm of ordinary beginnings — doors opening, engines turning, someone laughing too loudly. Inside, the world felt slower, anchored by the quiet pulse of a new idea taking shape. It wasn’t grand or urgent, but it felt right — the kind of thought that grows roots before anyone notices. By the time the clock struck ten, the day had already begun to write its own story.
+    	</p>
+	</SExample>
+</Layout>

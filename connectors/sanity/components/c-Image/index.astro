@@ -1,0 +1,74 @@
+---
+import './index.scss'
+import { urlFor } from '../../lib/image-builder.js'
+
+const {
+	image, // required: Sanity image object with asset._ref
+	alt = '',
+	sizes = '(min-width: 1024px) 1024px, 100vw',
+	widths = [320, 640, 960, 1200, 1800],
+	loading = 'lazy',
+	decoding = 'async',
+	quality = 70,
+	intrinsic = false,
+	dataRef = '',
+	dataAttributes = [],
+} = Astro.props
+
+if (!image) throw new Error('SanityImage: `image` prop is required.')
+
+// Helper: build URL for a specific width
+function buildSrcForWidth(img, w) {
+	return urlFor(img).width(w).auto('format').quality(quality).url()
+}
+
+// Build srcset string
+const srcset = widths.map((w) => `${buildSrcForWidth(image, w)} ${w}w`).join(', ')
+
+// Pick a default src (largest width <= 1200px as safe default)
+const defaultWidth = Math.min(Math.max(...widths), 1200)
+const src = buildSrcForWidth(image, defaultWidth)
+
+// Pull intrinsic dimensions from Sanity metadata
+const intrinsicWidth = image?.asset?.metadata?.dimensions?.width ?? undefined
+const intrinsicHeight = image?.asset?.metadata?.dimensions?.height ?? undefined
+
+// Calculate aspect ratio for intrinsic wrapper
+const ratio = intrinsicWidth && intrinsicHeight ? Math.floor((intrinsicWidth / intrinsicHeight) * 1000) / 1000 : 1
+
+// Compose image props object
+const imgProps = {
+	src,
+	srcset,
+	sizes,
+	alt,
+	width: intrinsicWidth,
+	height: intrinsicHeight,
+	loading,
+	decoding,
+	fetchpriority: loading === 'eager' ? 'high' : 'auto',
+}
+
+const elementProps = {
+	...(dataRef ? { 'data-ref': dataRef } : {}),
+	...dataAttributes.reduce((attrs, attr) => {
+		attrs[`data-${attr.name}`] = attr.value
+		return attrs
+	}, {}),
+	'data-orientation': intrinsicWidth && intrinsicHeight
+		? (intrinsicWidth > intrinsicHeight ? 'landscape' : 'portrait')
+		: 'square',
+}
+---
+
+{
+	intrinsic ? (
+		<div class="c-Image c-Image--intrinsic" style={`aspect-ratio: ${ratio}`} {...elementProps}>
+			<img {...imgProps} />
+		</div>
+	) : (
+		<div class="c-Image c-Image--static" {...elementProps}>
+			<img {...imgProps} />
+		</div>
+	)
+}

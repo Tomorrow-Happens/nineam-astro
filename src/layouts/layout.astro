@@ -1,0 +1,34 @@
+---
+import Meta from '@partials/meta.astro'
+import GridVisualizer from '@partials/grid-visualizer.astro'
+
+import EHeader from '@elements/e-Header/index.astro';
+import SFooter from '@sections/s-Footer/index.astro';
+
+import '@css/main.scss'
+
+import { generateBodyClasses } from '@js/helpers/body-classes'
+const { title, description, pageType = 'default' } = Astro.props
+
+const bodyClasses = generateBodyClasses(Astro.url.pathname)
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<Meta title={title} description={description} />
+	</head>
+	<body
+		data-s-page={pageType}
+		class={bodyClasses}>
+		<EHeader />
+		<GridVisualizer />
+		<div data-transition="wrapper">
+			<main data-transition="container" data-transition-namespace={bodyClasses}>
+				<slot />
+			</main>
+		</div>
+		<SFooter />
+		<script src="@js/main.js"></script>
+	</body>
+</html>

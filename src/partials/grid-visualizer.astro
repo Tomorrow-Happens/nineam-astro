@@ -1,0 +1,50 @@
+---
+const columns = Array.from({ length: 12 });
+---
+
+<div id="grid-visualizer" style="display: none;">
+  <div class="grid-visualizer__grid">
+    {columns.map(() => <div class="grid-visualizer__column" />)}
+  </div>
+</div>
+
+<style>
+  .grid-visualizer__grid {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gutter-x);
+    padding-left: var(--grid-margin);
+    padding-right: var(--grid-margin);
+    pointer-events: none;
+  }
+
+  .grid-visualizer__column {
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0.1);
+  }
+</style>
+
+<style is:global>
+  body.outlined * {
+    outline: 1px solid rgba(255, 0, 0, 0.15);
+  }
+</style>
+
+<script>
+  let visible = false;
+  function handleKeyPress(event: KeyboardEvent) {
+    if (event.ctrlKey && event.code === "KeyG") {
+      visible = !visible;
+      const el = document.getElementById("grid-visualizer");
+      if (el) el.style.display = visible ? "block" : "none";
+      document.body.classList.toggle("outlined", visible);
+    }
+  }
+  window.addEventListener("keydown", handleKeyPress);
+</script>

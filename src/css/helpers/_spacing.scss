@@ -1,0 +1,24 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:string';
+@use '@css/tokens/breakpoints' as *;
+
+/**
+   * Calculates a linear value between CSS variables.
+   *
+   * @param $mobile-size   The size at the mobile breakpoint as a CSS variable.
+   * @param $desktop-size  The size at the desktop breakpoint as a CSS variable.
+   * @return               The calculated CSS value.
+   */
+@function linear-value-between-values($mobile-size, $desktop-size) {
+   @if $mobile-size == $desktop-size {
+        @return $mobile-size;
+    }
+    $desktop-unitless: math.div($desktop-size, 1px);
+    $mobile-unitless: math.div($mobile-size, 1px);
+    $mobile-range: math.div($resolution-range-bottom, 1px);
+    $desktop-range: math.div($resolution-range-top, 1px);
+
+    @return calc(#{$mobile-size} + (#{$desktop-unitless} - #{$mobile-unitless}) * ((100vw - #{$mobile-range}px) / (#{$desktop-range} - #{$mobile-range})));
+}

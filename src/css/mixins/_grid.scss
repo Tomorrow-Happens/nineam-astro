@@ -1,0 +1,18 @@
+@use '@css/mixins/_spacing' as *;
+
+@mixin grid-base($padding: true, $row-gap: false, $col-gap: true) {
+	display: grid;
+	grid-template-columns: repeat(var(--grid-columns), 1fr);
+
+	@if $padding == true {
+		@include default-side-padding;
+	}
+
+	@if $col-gap == true {
+		column-gap: var(--grid-gutter-x);
+	}
+
+	@if $row-gap == true {
+		row-gap: var(--grid-gutter-y);
+	}
+}

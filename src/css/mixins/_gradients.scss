@@ -1,0 +1,29 @@
+@mixin linear-gradient() {
+	&:before {
+		content: '';
+		z-index: 1;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		display: block;
+		height: 18rem;
+		background: linear-gradient(
+			180deg,
+			transparent,
+			rgba(var(--kn-linear-gradient), 0.01) 9%,
+			rgba(var(--kn-linear-gradient), 0.07) 18%,
+			rgba(var(--kn-linear-gradient), 0.15) 25%,
+			rgba(var(--kn-linear-gradient), 0.25) 32%,
+			rgba(var(--kn-linear-gradient), 0.37) 38%,
+			rgba(var(--kn-linear-gradient), 0.5) 44%,
+			rgba(var(--kn-linear-gradient), 0.62) 51%,
+			rgba(var(--kn-linear-gradient), 0.74) 58%,
+			rgba(var(--kn-linear-gradient), 0.84) 66%,
+			rgba(var(--kn-linear-gradient), 0.92) 76%,
+			rgba(var(--kn-linear-gradient), 0.98) 87%,
+			rgba(var(--kn-linear-gradient), 1)
+		);
+		pointer-events: none;
+	}
+}

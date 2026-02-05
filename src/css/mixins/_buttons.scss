@@ -1,0 +1,43 @@
+@use '@css/mixins/ft' as *;
+
+@mixin link-line-visible() {
+	display: inline-block;
+	position: relative;
+
+	&::after {
+		content: '';
+		width: 100%;
+		position: absolute;
+		bottom: 0px;
+		right: 0;
+		transition: all 0.2s ease-in-out;
+		transform-origin: right;
+		background: currentColor;
+		height: 1px;
+	}
+
+	&:hover::after {
+		width: 0px;
+	}
+}
+
+@mixin link-line-not-visible() {
+	display: inline-block;
+	position: relative;
+
+	&::after {
+		content: '';
+		width: 0px;
+		position: absolute;
+		bottom: -1px;
+		left: 0;
+		transition: all 0.2s ease-in-out;
+		transform-origin: left;
+		background: currentColor;
+		height: 1px;
+	}
+
+	&:hover::after {
+		width: 100%;
+	}
+}

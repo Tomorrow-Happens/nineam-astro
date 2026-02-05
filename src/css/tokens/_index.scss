@@ -1,0 +1,78 @@
+@use '@css/mixins/media' as *;
+
+@layer tokens {
+	:root {
+		// Base Colors
+		--midnight: #121315;
+		--white: #ffffff;
+		--gray-1: #F4F5F7;
+		--gray-2: #D9D9D9;
+		--gray-3: #707070;
+		--gray-4: #525252;
+		--green: #D2FFCE;
+
+		// Grid
+		--grid-margin: 26px;
+		--grid-gutter-x: 24px;
+		--grid-gutter-y: 24px;
+		--grid-columns: 4;
+
+		@include media('>medium') {
+			--grid-columns: 12;
+			--grid-margin: 60px;
+		}
+
+		// Spacing
+		--space-0: 0rem;
+		--space-1: 0.0625rem;  /* 1px */
+		--space-2: 0.125rem;   /* 2px */
+		--space-3: 0.25rem;    /* 4px */
+		--space-4: 0.5rem;     /* 8px */
+		--space-5: 0.75rem;    /* 12px */
+		--space-6: 1rem;       /* 16px */
+		--space-7: 1.25rem;    /* 20px */
+		--space-8: 1.5rem;     /* 24px */
+		--space-9: 2rem;       /* 32px */
+		--space-10: 2.5rem;    /* 40px */
+		--space-11: 3rem;      /* 48px */
+		--space-12: 3.5rem;    /* 56px */
+		--space-13: 4rem;      /* 64px */
+		--space-14: 4.5rem;    /* 72px */
+		--space-15: 5rem;      /* 80px */
+		--space-16: 5.5rem;    /* 88px */
+		--space-17: 6rem;      /* 96px */
+		--space-18: 6.5rem;    /* 104px */
+		--space-19: 7rem;      /* 112px */
+		--space-20: 7.5rem;    /* 120px */
+		--space-21: 8rem;      /* 128px */
+		--space-22: 8.5rem;    /* 136px */
+		--space-23: 9rem;      /* 144px */
+		--space-24: 9.5rem;    /* 152px */
+		--space-25: 10rem;     /* 160px */
+		--space-26: 10.5rem;   /* 168px */
+		--space-27: 11rem;     /* 176px */
+		--space-28: 11.5rem;   /* 184px */
+		--space-29: 12rem;     /* 192px */
+		--space-30: 12.5rem;   /* 200px */
+		--space-31: 13rem;     /* 208px */
+		--space-32: 13.5rem;   /* 216px */
+		--space-33: 14rem;     /* 224px */
+		--space-34: 14.5rem;   /* 232px */
+		--space-35: 15rem;     /* 240px */
+		--space-36: 15.5rem;   /* 248px */
+		--space-37: 16rem;     /* 256px */
+		--space-38: 16.5rem;   /* 264px */
+		--space-39: 17rem;     /* 272px */
+		--space-40: 17.5rem;   /* 280px */
+		--space-41: 18rem;     /* 288px */
+		--space-42: 18.5rem;   /* 296px */
+
+
+		// Transitions
+		--transition-default-duration: 0.3s;
+		--transition-default-ease: ease;
+		--transition-enter-duration: 0.4s;
+		--transition-enter-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		--transition-pop: cubic-bezier(0.16, 1, 0.3, 1);
+	}
+}

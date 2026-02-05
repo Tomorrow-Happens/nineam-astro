@@ -1,0 +1,20 @@
+@use '@css/mixins/media' as *;
+@use '@css/mixins/v-spacing' as *;
+@use '@css/mixins/ft' as *;
+
+@layer base {
+	body {
+		color: var(--midnight);
+		background-color: var(--white);
+
+		@include ft(body);
+
+		&.is-transitioning {
+			overflow: hidden;
+		}
+	}
+
+	html {
+		font-size: 16px;
+	}
+}

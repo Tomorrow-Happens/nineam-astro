@@ -1,0 +1,25 @@
+{
+  "name": "nine-am",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Astro boilerplate with GSAP and Barba page transitions",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@barba/prefetch": "^2.2.0",
+    "astro": "^5.15.5"
+  },
+  "devDependencies": {
+    "@astrojs/netlify": "^6.6.4",
+    "@barba/core": "^2.10.3",
+    "flickity": "^3.0.0",
+    "gsap": "^3.13.0",
+    "include-media": "^2.0.0",
+    "mitt": "^3.0.1",
+    "sass-embedded": "^1.93.3"
+  }
+}

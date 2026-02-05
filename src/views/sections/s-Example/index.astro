@@ -1,0 +1,13 @@
+---
+import './index.scss'
+
+const { title = 'Example Section', description = '' } = Astro.props
+---
+
+<s-example class="s-Example" data-s-working="true">
+	<div class="s-Example__inner">
+		<h2 class="s-Example__title" data-ref="title">{title}</h2>
+		{description && <p class="s-Example__description" data-ref="description">{description}</p>}
+		<div class="s-Example__slot"><slot /></div>
+	</div>
+</s-example>

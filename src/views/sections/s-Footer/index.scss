@@ -1,0 +1,24 @@
+@use '@css/mixins/v-spacing' as *;
+@use '@css/mixins/_spacing' as *;
+@use '@css/mixins/_buttons' as *;
+@use '@css/mixins/_transitions' as *;
+
+.s-Footer {
+    @include default-side-margin;
+    @include v-spacing(margin-top, var(--space-14), var(--space-14));
+    @include v-spacing(padding-top, var(--space-8), var(--space-8));
+    @include v-spacing(padding-bottom, var(--space-8), var(--space-8));
+    border-top: 2px solid currentColor;
+    display: flex;
+    justify-content: space-between;
+
+    &__left {
+
+    }
+
+    &__right {
+        a {
+            @include link-line-not-visible;
+        }
+    }
+}

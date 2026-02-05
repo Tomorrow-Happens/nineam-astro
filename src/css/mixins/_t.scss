@@ -1,0 +1,100 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:list';
+@use '@css/tokens/fonts' as fonts;
+@use '@css/tokens/type' as ramp;
+@use '@css/mixins/v-spacing' as spacing;
+@use '@css/helpers/type' as *;
+
+/// Convert px to rem (assumes 16px root)
+@function _px-to-rem($px) {
+	@if math.unit($px) == 'rem' {
+		@return $px;
+	}
+	@if math.unit($px) == 'px' {
+		@return math.div($px, 16px) * 1rem;
+	}
+	@return $px;
+}
+
+/// Core type mixin
+/// @param $key - ramp key (h1, body, etc.)
+@mixin t($key, $weight: null, $style: null, $caps: null, $override-size: null, $width-factor: null, $track: null, $line-height: null) {
+	$conf: map.get(ramp.$type-ramp, $key);
+	@if $conf == null {
+		@error "Unknown type key `#{$key}`";
+	}
+
+	// Font family
+	$font-key: map.get($conf, font);
+	font-family: font-family-for($font-key);
+
+	// Weight / style / caps
+	$w: map.get($conf, weight);
+	@if $weight != null {
+		$w: $weight;
+	}
+
+	$st: map.get($conf, style);
+	@if $style != null {
+		$st: $style;
+	}
+
+	$caps-val: map.get($conf, caps);
+	@if $caps != null {
+		$caps-val: $caps;
+	}
+
+	@if $w != null {
+		font-weight: $w;
+	}
+	@if $st != null {
+		font-style: $st;
+	}
+	@if $caps-val == true {
+		text-transform: uppercase;
+	}
+
+	// Font sizes
+	$size-map: map.get($conf, size);
+	@if $override-size != null {
+		$size-map: $override-size;
+	}
+	$s-min: map.get($size-map, min);
+	$s-max: map.get($size-map, max);
+
+	@if $s-min == $s-max {
+		font-size: $s-max;
+	} @else {
+		@include spacing.v-spacing(font-size, $s-min, $s-max);
+	}
+
+	// Line-height
+	$lh: map.get($conf, lh);
+	@if $line-height != null {
+		$lh: $line-height;
+	}
+
+	@if $lh != null {
+		line-height: $lh;
+	}
+
+	// Width factor
+	$wf: map.get($conf, widthFactor);
+	@if $width-factor != null {
+		$wf: $width-factor;
+	}
+	@if $wf != null {
+		@include spacing.v-spacing(max-width, $s-min * $wf, $s-max * $wf);
+	}
+
+	// Tracking
+	$trk: map.get($conf, track);
+	@if $track != null {
+		$trk: $track;
+	}
+
+	@if $trk != null {
+		@include spacing.v-spacing(letter-spacing, $s-min * math.div(list.nth($trk, 1), 100), $s-max * math.div(list.nth($trk, 2), 100));
+	}
+}

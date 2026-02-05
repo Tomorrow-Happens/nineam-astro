@@ -1,0 +1,49 @@
+@use 'sass:map';
+@use 'sass:string';
+@use 'sass:meta';
+@use '@css/tokens/type' as ramp;
+@use '@css/mixins/t' as type;
+
+/// Convert camelCase to kebab-case (e.g., bodyLg -> body-lg)
+@function to-kebab($str) {
+	$result: '';
+	@for $i from 1 through string.length($str) {
+		$char: string.slice($str, $i, $i);
+		$lower: string.to-lower-case($char);
+		@if $char != $lower and $i > 1 {
+			$result: $result + '-' + $lower;
+		} @else {
+			$result: $result + $lower;
+		}
+	}
+	@return $result;
+}
+
+/// Auto-generate ft-* mixins from type ramp
+/// Usage: @include ft(body), @include ft(h1), @include ft(body-lg), etc.
+@mixin ft($name) {
+	// Try the name as-is first (for keys like h1, body)
+	@if map.has-key(ramp.$type-ramp, $name) {
+		@include type.t($name);
+	} @else {
+		// Convert kebab-case to camelCase and try again
+		$camel: '';
+		$capitalize-next: false;
+		@for $i from 1 through string.length($name) {
+			$char: string.slice($name, $i, $i);
+			@if $char == '-' {
+				$capitalize-next: true;
+			} @else if $capitalize-next {
+				$camel: $camel + string.to-upper-case($char);
+				$capitalize-next: false;
+			} @else {
+				$camel: $camel + $char;
+			}
+		}
+		@if map.has-key(ramp.$type-ramp, $camel) {
+			@include type.t($camel);
+		} @else {
+			@error "Unknown type key `#{$name}` (tried `#{$camel}` too)";
+		}
+	}
+}

@@ -1,0 +1,11 @@
+@mixin touch() {
+	@media (hover: none) and (pointer: coarse) {
+		@content;
+	}
+}
+
+@mixin desktop() {
+	@media (hover: hover) and (pointer: fine) {
+		@content;
+	}
+}

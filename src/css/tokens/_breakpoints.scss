@@ -1,0 +1,14 @@
+@use "sass:map";
+
+$breakpoints: (
+	xsmall: 420px,
+	msmall: 600px,
+	small: 768px,
+	medium: 1025px,
+	large: 1440px,
+	xlarge: 1800px,
+	xxlarge: 2000px,
+);
+
+$resolution-range-bottom: map.get($breakpoints, xsmall);
+$resolution-range-top: map.get($breakpoints, large);

@@ -1,0 +1,28 @@
+// Setup
+@use 'tokens';
+@use 'reset/modern';
+
+// Base
+@use 'base/scaffolding';
+@use 'base/type';
+
+@use '@css/mixins/media' as im;
+@use '@css/mixins/spacing' as spacing;
+@use '@css/mixins/rich-text';
+
+@use '@css/pages/page';
+
+// Helpers
+
+// Libraries
+@use 'libs/flickity';
+
+@use '@css/mixins/gradients' as *;
+
+body {
+	height: 100vh;
+}
+
+main {
+	min-height: 100dvh;
+}

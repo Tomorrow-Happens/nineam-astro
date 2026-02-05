@@ -1,0 +1,13 @@
+@use '@css/mixins/_spacing' as *;
+@use '@css/mixins/_transitions' as *;
+@use '@css/mixins/_v-spacing' as *;
+
+.c-Text {
+    border-top: 2px solid currentColor;
+    @include v-spacing(padding-top, var(--space-8), var(--space-8));
+    @include v-spacing(padding-bottom, var(--space-14), var(--space-20));
+    @include v-spacing(margin-top, var(--space-8), var(--space-8));
+    @include v-spacing(margin-bottom, var(--space-8), var(--space-8));
+    @include default-side-margin;
+    @include transition-enter;
+}

@@ -1,0 +1,27 @@
+---
+import CImage from '@components/c-Image/index.astro';
+import CText from '@components/c-Text/index.astro';
+import SExample from '@sections/s-Example/index.astro';
+import Layout from '@layouts/layout.astro';
+
+import testImage from '@images/test.jpg';
+
+const title = "about nine:am"
+const description = "An opinionated framework for Astro."
+---
+
+<Layout title={title} description={description}>
+	<CText>
+		<h2 class="ft-h1">
+			The day leaned softly against the edge of time, unhurried and golden. Shadows stretched across the ground like thoughts that never found words. A bird called out once, as if to remind the world it was still listening. In that quiet, something simple took root — not a dream, but the space that allows one to grow.
+		</h2>
+		<br/>
+		<p>– Edge of Time</p>
+	</CText>
+	<SExample title="About">
+		<p>
+			The air carried a soft hum of distant traffic and the faint clatter of dishes from a nearby café. Somewhere, a window creaked open and let in the scent of rain just beginning to fall. It wasn’t a moment anyone would remember, but it held a quiet weight — the kind that lives between one thought and the next. The day unfolded slowly, not in bursts of purpose, but in small, unhurried gestures. And somehow, that was enough.
+    	</p>
+	</SExample>
+	<CImage src={testImage} />
+</Layout>

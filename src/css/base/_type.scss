@@ -1,0 +1,53 @@
+@use 'sass:map';
+@use 'sass:string';
+@use '@css/tokens/type' as ramp;
+@use '@css/mixins/t' as type;
+
+/// Convert camelCase to kebab-case (e.g., bodyLg -> body-lg)
+@function to-kebab($str) {
+	$result: '';
+	@for $i from 1 through string.length($str) {
+		$char: string.slice($str, $i, $i);
+		$lower: string.to-lower-case($char);
+		@if $char != $lower and $i > 1 {
+			$result: $result + '-' + $lower;
+		} @else {
+			$result: $result + $lower;
+		}
+	}
+	@return $result;
+}
+
+/// Map ramp keys to semantic HTML elements
+$semantic-elements: (
+	body: 'body',
+	h1: 'h1',
+	h2: 'h2',
+	h3: 'h3',
+	h4: 'h4',
+	h5: 'h5',
+	h6: 'h6',
+	p: 'p',
+	span: 'span'
+);
+
+@layer base {
+	// Auto-generate .ft-* classes and semantic element styles from type ramp
+	@each $key, $config in ramp.$type-ramp {
+		$class-name: to-kebab($key);
+		$semantic: map.get($semantic-elements, $key);
+
+		// Generate utility class: .ft-body, .ft-h1, .ft-body-lg, etc.
+		.ft-#{$class-name},
+		.ft-#{$class-name} > * {
+			@include type.t($key);
+		}
+
+		// If this key maps to a semantic element, style that too
+		@if $semantic {
+			#{$semantic} {
+				@include type.t($key);
+			}
+		}
+	}
+}

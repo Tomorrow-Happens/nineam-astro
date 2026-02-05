@@ -1,0 +1,31 @@
+@use '@css/mixins/v-spacing' as *;
+@use '@css/mixins/_spacing' as *;
+
+.e-Header {
+    @include v-spacing(margin-bottom, var(--space-14), var(--space-20));
+    @include default-side-padding;
+    @include v-spacing(padding-top, var(--space-8), var(--space-10));
+
+    ul {
+        position: absolute;
+        @include v-spacing(top, var(--space-8), var(--space-10));
+        @include default-side-padding;
+        display: flex;
+        right: 0;
+        li {
+            @include v-spacing(margin-left, var(--space-8), var(--space-10));
+            &:first-child {
+                margin-left: 0;
+            }
+
+            a {
+                &:hover {
+                    font-style: italic;
+                }
+                &.current-menu-item {
+                    font-style: italic;
+                }
+            }
+        }
+    }
+}

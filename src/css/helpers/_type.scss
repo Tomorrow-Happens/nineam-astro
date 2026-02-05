@@ -1,0 +1,31 @@
+@use 'sass:map';
+@use 'sass:math';
+@use '@css/tokens/fonts' as fonts;
+@use '@css/tokens/type' as ramp;
+@use '@css/mixins/v-spacing' as spacing;
+
+/* --- Functions --- */
+
+// Font-family lookup
+@function font-family-for($font-key) {
+	@return map.get(fonts.$fonts, $font-key);
+}
+
+// Tracking % to length
+@function _tracking($percent, $font-size) {
+	@return $font-size * ($percent / 100);
+}
+
+// Force unitless line-height
+@function _lh($lh) {
+	@if (unit($lh) == '') {
+		@return $lh;
+	}
+	@return math.div($lh, 1em);
+}
+
+// Internal ramp prop getter
+@function _r($key, $prop) {
+	@return map.get(map.get(ramp.$type-ramp, $key), $prop);
+}
+

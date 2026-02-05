@@ -1,0 +1,18 @@
+---
+const {
+	title = 'Nine AM',
+	description = 'Astro boilerplate with GSAP and Barba',
+	faviconSvg = '/favicon.svg',
+	faviconPng = '/favicon.png',
+	ogImage = ''
+} = Astro.props
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="icon" type="image/svg+xml" href={faviconSvg} />
+{faviconPng && <link rel="icon" type="image/png" href={faviconPng} />}
+<meta name="generator" content={Astro.generator} />
+<title>{title}</title>
+<meta name="description" content={description} />
+{ogImage && <meta property="og:image" content={ogImage} />}

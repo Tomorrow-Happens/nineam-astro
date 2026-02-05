@@ -1,0 +1,40 @@
+@use '@css/mixins/spacing' as *;
+@use '@css/mixins/media' as *;
+@use '@css/mixins/v-spacing' as *;
+@use '@css/mixins/transitions' as *;
+@use '@css/mixins/grid' as *;
+
+.s-Example {
+	@include default-side-margin;
+	@include v-spacing(padding-top, var(--space-8), var(--space-12));
+	@include v-spacing(padding-bottom, var(--space-8), var(--space-12));
+
+	&__inner {
+		@include grid-base($padding: false);
+	}
+
+	&__title {
+		grid-column: 1 / -1;
+		margin-bottom: var(--space-4);
+
+		@include media('>medium') {
+			grid-column: 1 / 6;
+		}
+	}
+
+	&__description {
+		grid-column: 1 / -1;
+
+		@include media('>medium') {
+			grid-column: 1 / 6;
+		}
+	}
+
+	&__slot {
+		grid-column: 1 / -1;
+
+		@include media('>medium') {
+			grid-column: 1 / 6;
+		}
+	}
+}

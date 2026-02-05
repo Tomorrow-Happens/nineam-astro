@@ -1,0 +1,54 @@
+@use 'sass:string';
+// Your canonical type ramp. Each item defines min/max size, line-height (optional),
+// width factor (optional), and letter-spacing as Figma % pair (optional).
+$type-ramp: (
+	body: (
+		font: LettraMono,
+		weight: 200,
+		style: normal,
+		caps: false,
+		size: (
+			min: 16px,
+			max: 20px,
+		),
+		lh: 1.4,
+		track: (-0.5, -1),
+		widthFactor: null,
+	),
+
+	h1: (
+		font: LettraMono,
+		weight: normal,
+		style: normal,
+		caps: true,
+		size: (
+			min: 36px,
+			max: 72px,
+		),
+		lh: 1,
+		track: (
+			-1,
+			-2,
+		),
+		// Figma % at min/max size
+		widthFactor: null,
+	),
+
+	h2: (
+		font: LettraMono,
+		weight: normal,
+		style: normal,
+		caps: false,
+		size: (
+			min: 32px,
+			max: 64px,
+		),
+		lh: 1.1,
+		track: (
+			-1,
+			-2,
+		),
+		// Figma % at min/max size
+		widthFactor: null,
+	)
+);

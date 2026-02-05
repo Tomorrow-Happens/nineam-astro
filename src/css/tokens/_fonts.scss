@@ -1,0 +1,44 @@
+@use 'sass:string';
+
+@font-face {
+    font-family: 'PP Lettra Mono';
+    src: url('/fonts/LettraMono/PPLettraMono-UltralightItalic.woff2') format('woff2'),
+        url('/fonts/LettraMono/PPLettraMono-UltralightItalic.woff') format('woff');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Lettra Mono';
+    src: url('/fonts/LettraMono/PPLettraMono-Ultralight.woff2') format('woff2'),
+        url('/fonts/LettraMono/PPLettraMono-Ultralight.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Lettra Mono';
+    src: url('/fonts/LettraMono/PPLettraMono-MediumItalic.woff2') format('woff2'),
+        url('/fonts/LettraMono/PPLettraMono-MediumItalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Lettra Mono';
+    src: url('/fonts/LettraMono/PPLettraMono-Medium.woff2') format('woff2'),
+        url('/fonts/LettraMono/PPLettraMono-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+// No CSS here — just maps.
+$fonts: (
+	LettraMono: string.unquote('PP Lettra Mono, monospace'),
+);

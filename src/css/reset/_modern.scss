@@ -1,0 +1,150 @@
+@layer reset {
+	/* Box sizing rules */
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	// Remove default padding on lists
+	// Remove list styles on ul, ol elements
+	ul,
+	ol {
+		padding: 0;
+		list-style: none;
+		margin: 0;
+	}
+
+	/* Remove default margin */
+	body,
+	h1,
+	h2,
+	h3,
+	h4,
+	p,
+	ul[class],
+	ol[class],
+	figure,
+	blockquote,
+	dl,
+	ul,
+	ol,
+	dd {
+		margin: 0;
+	}
+
+	/* Unset default fonts so they inherit from their parent and not browser defaults */
+	h1,
+	h2,
+	h3,
+	h4,
+	p {
+		font-size: inherit;
+		line-height: inherit;
+		letter-spacing: inherit;
+		font-family: inherit;
+		font-style: inherit;
+		text-transform: inherit;
+		font-weight: inherit;
+	}
+
+	/* Set core root defaults */
+	html {
+		scroll-behavior: auto;
+	}
+
+	/* Set core body defaults */
+	body {
+		text-rendering: optimizeSpeed;
+		line-height: 1;
+
+		// lightens text weights on Mac OS.
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/*
+Remove underline and colour from links
+They will be added back on in WYSIWYG
+*/
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	a:not([class]) {
+		text-decoration-skip-ink: auto;
+	}
+
+	/* Make images easier to work with */
+	img,
+	picture {
+		max-width: 100%;
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	table {
+		border-spacing: 0;
+		border-collapse: collapse;
+	}
+
+	// prevent faux bold style being applied
+	th {
+		font-weight: inherit;
+	}
+
+	address {
+		font-style: inherit;
+	}
+
+	fieldset {
+		padding: 0;
+		border: 0;
+	}
+
+	button {
+		display: inline-block;
+		background-color: unset;
+		border: none;
+		padding: 0;
+		margin: 0;
+		appearance: none;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		cursor: pointer;
+		font-family: inherit;
+		font-size: inherit;
+		text-transform: inherit;
+		color: inherit;
+	}
+
+	/* Remove all animations and transitions for people that prefer not to see them */
+	@media (prefers-reduced-motion: reduce) {
+		* {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+
+	:where(
+			:not(html):not(body):not(head):not(meta):not(link):not(script):not(style):not(title):not(base):not(template):not(slot):not(canvas):not(svg):not(math):not(noscript):not(
+					br
+				):not(hr):not(wbr):not(param):not(source):not(track):not(embed):not(object):not(area):not(map):not(col):not(input):not(select):not(option):not(optgroup):not(
+					textarea
+				):not(button):not(label):not(form):not(fieldset):not(legend):not(datalist):not(output):not(progress):not(meter):not(details):not(summary):not(dialog):not(menu):not(
+					menuitem
+				):not(frame):not(frameset):not(iframe):not(script):not(style):not(link):not(meta):not(title):not(base):not(template):not(slot):not(canvas):not(svg):not(math):not(
+					noscript
+				):not(br):not(hr):not(wbr):not(param):not(source):not(track):not(embed):not(object):not(area):not(map):not(col):not(input):not(select):not(option):not(
+					optgroup
+				):not(textarea):not(button):not(label):not(form):not(fieldset):not(legend):not(datalist):not(output):not(progress):not(meter):not(details):not(summary):not(
+					dialog
+				):not(menu):not(menuitem):not(frame):not(frameset):not(iframe)
+		) {
+		display: block;
+	}
+}

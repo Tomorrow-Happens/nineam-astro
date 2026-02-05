@@ -1,0 +1,25 @@
+/* ============================================================================================================
+	Line Height Crop (lhCrop)
+	Removes the additional line height from top of text - https://codyhouse.co/blog/post/line-height-crop
+	Use to make sure the top of your text lines up with other elements along side it.
+	Enter a unitless line height (same as the type line hight)
+============================================================================================================= */
+@mixin lh-t-crop() {
+	&::before {
+		content: '';
+		display: block;
+		height: 0;
+		width: 0;
+		padding-top: calc((#{var(--lh-t-adjust)} - #{var(--line-height)}) * 0.5em);
+	}
+}
+
+@mixin lh-b-crop() {
+	&::after {
+		content: '';
+		display: block;
+		height: 0;
+		width: 0;
+		padding-top: calc((#{var(--lh-b-adjust)} - #{var(--line-height)}) * 0.5em);
+	}
+}

@@ -1,0 +1,24 @@
+@use '@css/helpers/spacing' as *;
+@use '@css/tokens/breakpoints' as *;
+@use '@css/mixins/media' as *;
+
+/**
+   * v-spacing
+   * The main responsive spacing helper, used to generate variable type sizing.
+   * Can be used for a variety of CSS properties, e.g. margins/paddings etc.
+   *
+   * @param $field         The CSS property to apply spacing to.
+   * @param $mobile-size   The size at the mobile breakpoint. Passed in as either a variable containing a size (e.g. 16px) or a variable declaration (--variable-name).
+   * @param $desktop-size  The size at the desktop breakpoint. Passed in as either a variable containing a size (e.g. 16px) or a variable declaration (--variable-name).
+   */
+@mixin v-spacing($field, $mobile-size, $desktop-size) {
+	#{$field}: linear-value-between-values($mobile-size, $desktop-size);
+
+    @include media('>#{$resolution-range-top}') {
+        #{$field}: $desktop-size;
+    }
+
+    @include media('<=#{$resolution-range-bottom}') {
+        #{$field}: $mobile-size;
+    }
+}

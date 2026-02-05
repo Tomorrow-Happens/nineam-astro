@@ -1,0 +1,70 @@
+@use '@css/mixins/v-spacing' as *;
+@use '@css/mixins/ft' as *;
+
+/* ========================
+	PER-PROJECT SETUP
+======================== */
+.c-RichText {
+	// h1 {
+	// }
+
+	// h2 {
+	// 	@include ft-general-20-30;
+	// 	@include v-spacing(margin-top, 20px, 20px);
+	// 	@include v-spacing(margin-bottom, 20px, 20px);
+	// }
+
+	// h3 {
+	// 	@include v-spacing(margin-top, 20px, 20px);
+	// 	@include ft-general-20-30;
+	// }
+
+	// h3 + .c-RichText__paragraph p,
+	// h4 + .c-RichText__paragraph p {
+	// 	@include v-spacing(margin-bottom, 20px, 20px);
+	// }
+
+	// h4 {
+	// 	@include ft-macan-11-16-extrabold;
+	// }
+
+	// h5 {
+	// }
+
+	// p {
+	// 	text-transform: uppercase;
+	// }
+
+	// a {
+	// }
+
+	// em {
+	// 	font-style: unset;
+	// 	text-indent: 1.1rem;
+	// }
+
+	// ul {
+	// 	li {
+	// 		@include ft-general-20-30;
+	// 		line-height: 1.15;
+	// 	}
+	// }
+
+	// ul,
+	// ol {
+	// }
+
+	// &__spacer {
+	// 	@include v-spacing(margin-top, 40px, 45px);
+	// }
+
+	// &__inline-image {
+	// 	border-bottom: 2px solid var(--c-gold);
+	// 	@include v-spacing(padding-bottom, 10px, 10px);
+	// 	@include v-spacing(margin-bottom, 25px, 25px);
+	// }
+
+	// // div wrapper
+	// &__paragraph {
+	// }
+}

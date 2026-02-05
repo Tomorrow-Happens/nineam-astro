@@ -1,0 +1,19 @@
+---
+import './index.scss';
+import logo from '@images/nine-am-logo.svg';
+const currentPath = Astro.url.pathname;
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about/', label: 'About' },
+];
+---
+<div class="e-Header">
+    <img src={logo.src} alt="nine:am">
+	<ul>
+       {links.map(link => (
+            <li>
+                <a class={currentPath === link.href ? 'current-menu-item' : ''} href={link.href}>{link.label}</a>
+            </li>
+        ))}
+    </ul>
+</div>

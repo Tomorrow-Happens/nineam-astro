@@ -1,0 +1,7 @@
+@use '@css/tokens/breakpoints' as bp;
+
+@use 'include-media' as im with (
+	$breakpoints: bp.$breakpoints
+);
+
+@forward 'include-media'; // re-export the media mixin

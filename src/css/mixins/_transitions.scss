@@ -1,0 +1,14 @@
+@mixin transition-default() {
+	transition: all var(--transition-default-duration) var(--transition-default-ease);
+}
+
+@mixin transition-enter() {
+	transition: transform var(--transition-enter-duration) var(--transition-enter-ease);
+	transform: translateY(96px);
+	opacity: 0;
+
+	&.is-visible {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}

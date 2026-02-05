@@ -2,6 +2,8 @@
 
 A production-ready Astro boilerplate with GSAP animations and Barba.js page transitions.
 
+https://nineam.netlify.app
+
 ## Features
 
 - **Astro 5** - Static site generation with optional SSR
@@ -32,7 +34,7 @@ npm run preview
 ```
 nine-am/
 ├── src/
-│   ├── components/          # Astro layout components (meta, analytics)
+│   ├── partials/            # Astro layout partials (meta, analytics)
 │   ├── css/                 # SCSS design system
 │   │   ├── base/            # Base styles, typography, grid
 │   │   ├── helpers/         # Utility classes

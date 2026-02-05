@@ -8,6 +8,7 @@
       "@components/*": ["./src/views/components/*"],
       "@sections/*": ["./src/views/sections/*"],
       "@elements/*": ["./src/views/elements/*"],
+      "@assets/*": ["./src/assets/*"],
       "@images/*": ["./src/images/*"],
       "@partials/*": ["./src/partials/*"],
       "@css/*": ["./src/css/*"],

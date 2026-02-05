@@ -14,6 +14,7 @@ This is an Astro boilerplate with:
 @views/*       → src/views/*
 @components/*  → src/views/components/*
 @sections/*    → src/views/sections/*
+@assets/*      → src/assets/*
 @css/*         → src/css/*
 @layouts/*     → src/layouts/*
 @pages/*       → src/pages/*

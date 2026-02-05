@@ -1,3 +1,9 @@
+# Build output
+.astro
+
+# Claude Code
+.claude
+
 # Local Netlify folder
 .netlify
 

@@ -59,9 +59,103 @@ nine-am/
 
 ## Architecture
 
-### Custom Element Components
+### View Hierarchy
 
-Components use a custom element architecture for interactivity:
+Pages are composed of three types of views:
+
+| Prefix | Type | Purpose | Example |
+|--------|------|---------|---------|
+| `s-` | **Section** | Full parts of the site (hero, footer, feature block) | `s-Hero`, `s-Footer` |
+| `c-` | **Component** | Small reusable blocks | `c-Button`, `c-Image` |
+| `e-` | **Element** | Things that don't fit above - headers, utility cards, or views without JS | `e-Header` |
+
+---
+
+### The App (`src/js/core/app.js`)
+
+The App is the central conductor of the entire site. It's a singleton that orchestrates all interactive elements.
+
+**What it manages:**
+
+| Responsibility | Description |
+|----------------|-------------|
+| **Actors** | Tracks all active components, sections, and pages via `attach()` / `detach()` |
+| **Page Management** | Mounts/unmounts page classes based on `data-s-page` attribute on body |
+| **Tick Loop** | Runs a `requestAnimationFrame` loop, calling `onTick({ time, dt, frame })` on every actor |
+| **Resize** | Listens for resize/orientation changes, calls `onResize({ width, height, dpr, breakpoint })` on all actors |
+| **Event Bus** | Global pub/sub via `app.bus.emit()` / `app.bus.on()` |
+| **Globals** | Stores shared state: `breakpoint`, `isTouch`, `env`, `settings` |
+
+**How actors connect:**
+
+```
+App (singleton)
+ ├── attach(actor) → adds to Set, calls actor.onConnected()
+ ├── detach(actor) → calls actor.onDisconnected(), removes from Set
+ │
+ └── On every frame / resize:
+      └── iterates all actors → calls onTick() / onResize()
+```
+
+Components extending `BaseElement` or `Component` automatically attach/detach themselves when added/removed from the DOM.
+
+**Accessing the App:**
+
+```javascript
+// From within a component
+this.app.bus.emit('menuOpen')
+this.app.globals.breakpoint  // 'small', 'medium', 'large', etc.
+
+// From anywhere
+import { App } from '@js/core/app'
+const app = App.get()
+```
+
+---
+
+### Pages
+
+Each page can have its own class in `src/js/pages/`. The page class is selected via `data-s-page="pagename"` on the body element (used by Barba for transitions).
+
+```javascript
+// src/js/pages/homepage.js
+import Page from './page'
+import GSAP from 'gsap'
+import { Anims } from '@js/helpers/animations'
+
+export default class Homepage extends Page {
+  async hide(data) {
+    return GSAP.to(data.current.container, Anims.pageTransitions.hide)
+  }
+
+  async show(data) {
+    return GSAP.from(data.next.container, Anims.pageTransitions.show)
+  }
+}
+```
+
+Register pages in `src/js/pages/index.js`:
+
+```javascript
+import homepage from './homepage'
+
+export const pages = {
+  default: defaultPage,
+  homepage: homepage,
+}
+```
+
+---
+
+### Router (Barba)
+
+`src/js/plugins/router.js` integrates Barba.js for SPA-style navigation. It handles page transitions by calling the active page's `hide()` and `show()` methods.
+
+---
+
+### Interactive Views (Custom Elements)
+
+Sections and components use Custom Elements when they need JavaScript interactivity. They extend `BaseElement` (full control) or `Component` (sensible defaults) and inherit lifecycle hooks and helper methods. They auto-register with the App when connected to the DOM.
 
 ```javascript
 // src/views/components/c-Button/index.js
@@ -81,33 +175,41 @@ export default class CButton extends Component {
 }
 ```
 
-### Lifecycle Hooks
+---
 
-- `onInit()` - Constructor phase
-- `onConnected()` - Added to DOM
-- `onDisconnected()` - Removed from DOM
-- `onResize()` - Window resize
-- `onTick()` - Animation frame
-- `onEnter()` / `onLeave()` - Intersection observer
+### Lifecycle Hooks & Helpers
 
-### Page Transitions
+**Lifecycle hooks** (called by the App):
 
-Barba.js handles page transitions with the router. Always use `Anims` presets for consistent animations:
+| Hook | When Called |
+|------|-------------|
+| `onInit()` | In constructor, before DOM ready |
+| `onConnected()` | Element added to DOM |
+| `onDisconnected()` | Element removed from DOM |
+| `onTick({ time, dt, frame })` | Every animation frame |
+| `onResize({ width, height, dpr, breakpoint })` | On viewport change |
+| `onEnter(entry)` / `onLeave(entry)` | Intersection observer triggers |
 
-```javascript
-// src/js/pages/homepage.js
-import { Anims } from '@js/helpers/animations'
+**Helper methods** (available on Component):
 
-export default class Homepage extends Page {
-  async hide(data) {
-    return GSAP.to(data.current.container, Anims.pageTransitions.hide)
-  }
+| Helper | Description |
+|--------|-------------|
+| `this.refs` | Auto-collected `data-ref` elements |
+| `this.settings` | Parsed `data-s-*` attributes |
+| `this.app.bus` | Global event emitter |
+| `this.show()` / `this.hide()` / `this.toggle()` | Visibility helpers |
+| `this.$()` / `this.$$()` | Query selector shortcuts |
+| `this._autobind()` | Bind methods for event handlers |
+| `this.setState()` | State management with change tracking |
 
-  async show(data) {
-    return GSAP.from(data.next.container, Anims.pageTransitions.show)
-  }
-}
-```
+---
+
+### Styles
+
+- **Tokens** (`src/css/tokens/`) - Design variables (colors, spacing, fonts)
+- **Type Ramp** (`src/css/tokens/_type.scss`) - Defines typography scales
+- **ft() mixin** - Generates fluid typography from the type ramp: `@include ft(h1)`, `@include ft(body)`
+- **Mixins** (`src/css/mixins/`) - Reusable patterns (media queries, spacing, grid)
 
 ## Styling
 

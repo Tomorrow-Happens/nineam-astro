@@ -1,4 +1,4 @@
-# Nine AM
+# nine:am
 
 A production-ready Astro boilerplate with GSAP animations and Barba.js page transitions.
 
@@ -92,17 +92,19 @@ export default class CButton extends Component {
 
 ### Page Transitions
 
-Barba.js handles page transitions with the router:
+Barba.js handles page transitions with the router. Always use `Anims` presets for consistent animations:
 
 ```javascript
 // src/js/pages/homepage.js
+import { Anims } from '@js/helpers/animations'
+
 export default class Homepage extends Page {
   async hide(data) {
-    return GSAP.to(data.current.container, { opacity: 0 })
+    return GSAP.to(data.current.container, Anims.pageTransitions.hide)
   }
 
   async show(data) {
-    return GSAP.from(data.next.container, { opacity: 0 })
+    return GSAP.from(data.next.container, Anims.pageTransitions.show)
   }
 }
 ```

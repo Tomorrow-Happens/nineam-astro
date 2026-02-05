@@ -314,25 +314,20 @@ Set page type via body attribute:
 <body data-s-page="homepage">
 ```
 
-Create page class in `src/js/pages/`:
+Create page class in `src/js/pages/`. **Always use `Anims` presets for GSAP animations:**
 
 ```javascript
 import Page from './page'
 import GSAP from 'gsap'
+import { Anims } from '@js/helpers/animations'
 
 export default class Homepage extends Page {
 	async hide(data) {
-		return GSAP.to(data.current.container, {
-			opacity: 0,
-			duration: 0.4,
-		})
+		return GSAP.to(data.current.container, Anims.pageTransitions.hide)
 	}
 
 	async show(data) {
-		return GSAP.from(data.next.container, {
-			opacity: 0,
-			duration: 0.4,
-		})
+		return GSAP.from(data.next.container, Anims.pageTransitions.show)
 	}
 }
 ```
@@ -352,16 +347,18 @@ export const pages = {
 
 ## Animation Presets
 
-Import and use animation presets:
+**Always use `Anims` presets for GSAP animations** to maintain consistency across the project. Never use raw GSAP options directly.
 
 ```javascript
 import { Anims } from '@js/helpers/animations'
 import GSAP from 'gsap'
 
-GSAP.to(element, Anims.fadeIn)
-GSAP.to(element, Anims.slideUp)
-GSAP.to(element, Anims.textReveal)
+// Page transitions
+GSAP.to(element, Anims.pageTransitions.hide)
+GSAP.from(element, Anims.pageTransitions.show)
 ```
+
+Add new presets to `src/js/helpers/animations.js` as needed.
 
 ---
 

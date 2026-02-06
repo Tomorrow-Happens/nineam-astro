@@ -1,14 +1,14 @@
 # nine:am
 
-A production-ready Astro boilerplate with GSAP animations and Barba.js page transitions.
+A production-ready Astro boilerplate built by https://tomorrow-happens.studio.
 
 https://nineam.netlify.app
 
 ## Features
 
 - **Astro 5** - Static site generation with optional SSR
-- **GSAP** - Professional-grade animations
-- **Barba.js** - SPA-like page transitions
+- **GSAP** - GSAP animations
+- **Barba.js** - Page transition logic
 - **Custom Elements** - Component architecture with lifecycle hooks
 - **SCSS** - Design tokens, mixins, and CSS layers
 - **Netlify** - Deploy-ready adapter
@@ -157,7 +157,7 @@ export const pages = {
 
 ### Interactive Views (Custom Elements)
 
-Sections and components use Custom Elements when they need JavaScript interactivity. They extend `BaseElement` (full control) or `Component` (sensible defaults) and inherit lifecycle hooks and helper methods. They auto-register with the App when connected to the DOM.
+Sections and components use Custom Elements (Web Components) when they need JavaScript interactivity. They extend `BaseElement` (full control) or `Component` (sensible defaults) and inherit lifecycle hooks and helper methods. They auto-register with the App when connected to the DOM.
 
 ```javascript
 // src/views/components/c-Button/index.js

@@ -16,3 +16,19 @@
 		row-gap: var(--grid-gutter);
 	}
 }
+
+// Column span helper — sets grid-column to span N columns
+// Usage: @include grid-col(6) → spans 6 columns
+//        @include grid-col(6, 3) → spans 6 columns starting at column 3
+@mixin grid-col($span, $start: null) {
+	@if $start {
+		grid-column: #{$start} / span #{$span};
+	} @else {
+		grid-column: span #{$span};
+	}
+}
+
+// Full-width column spanning all columns
+@mixin grid-col-full {
+	grid-column: 1 / -1;
+}

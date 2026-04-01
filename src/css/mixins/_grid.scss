@@ -2,17 +2,17 @@
 
 @mixin grid-base($padding: true, $row-gap: false, $col-gap: true) {
 	display: grid;
-	grid-template-columns: repeat(var(--grid-columns), 1fr);
+	grid-template-columns: repeat(var(--grid-column-count), 1fr);
 
 	@if $padding == true {
 		@include default-side-padding;
 	}
 
 	@if $col-gap == true {
-		column-gap: var(--grid-gutter-x);
+		column-gap: var(--grid-gutter);
 	}
 
 	@if $row-gap == true {
-		row-gap: var(--grid-gutter-y);
+		row-gap: var(--grid-gutter);
 	}
 }

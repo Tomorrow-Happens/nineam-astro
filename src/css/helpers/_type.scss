@@ -6,11 +6,6 @@
 
 /* --- Functions --- */
 
-// Font-family lookup
-@function font-family-for($font-key) {
-	@return map.get(fonts.$fonts, $font-key);
-}
-
 // Tracking % to length
 @function _tracking($percent, $font-size) {
 	@return $font-size * ($percent / 100);

@@ -26,8 +26,8 @@
 	}
 
 	// Font family
-	$font-key: map.get($conf, font);
-	font-family: font-family-for($font-key);
+	$font-val: map.get($conf, font);
+	font-family: $font-val;
 
 	// Weight / style / caps
 	$w: map.get($conf, weight);

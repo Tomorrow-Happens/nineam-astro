@@ -5,9 +5,9 @@
 
 .s-Footer {
     @include default-side-margin;
-    @include v-spacing(margin-top, var(--space-14), var(--space-14));
-    @include v-spacing(padding-top, var(--space-8), var(--space-8));
-    @include v-spacing(padding-bottom, var(--space-8), var(--space-8));
+    @include v-spacing(margin-top, var(--sizing-4-5), var(--sizing-4-5));
+    @include v-spacing(padding-top, var(--sizing-1-5), var(--sizing-1-5));
+    @include v-spacing(padding-bottom, var(--sizing-1-5), var(--sizing-1-5));
     border-top: 2px solid currentColor;
     display: flex;
     justify-content: space-between;

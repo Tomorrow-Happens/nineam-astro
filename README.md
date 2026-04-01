@@ -213,37 +213,6 @@ export default class CButton extends Component {
 - **ft() mixin** - Generates fluid typography from the type ramp: `@include ft(h1)`, `@include ft(body)`
 - **Mixins** (`src/css/mixins/`) - Reusable patterns (media queries, spacing, grid)
 
-## Styling
-
-### Design Tokens
-
-Edit `src/css/tokens/_index.scss`:
-
-```scss
-:root {
-  --primary: #1e4634;
-  --secondary: #6bd488;
-  --accent: #ed5b2e;
-  // ...
-}
-```
-
-### Responsive Design
-
-```scss
-@use '@css/mixins/media' as *;
-
-.element {
-  padding: 20px;
-
-  @include media('>medium') {
-    padding: 40px;
-  }
-}
-```
-
-Breakpoints: `xsmall` (420px), `msmall` (600px), `small` (768px), `medium` (1025px), `large` (1440px), `xlarge` (1800px)
-
 ## Creating Components
 
 See `CLAUDE.md` for detailed scaffolding instructions.

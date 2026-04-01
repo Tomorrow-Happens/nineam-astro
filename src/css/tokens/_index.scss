@@ -2,7 +2,11 @@
 
 @layer tokens {
 	:root {
-		// Base Colors
+		// =============================================
+		// Primitives
+		// =============================================
+
+		// Colors
 		--midnight: #121315;
 		--white: #ffffff;
 		--gray-1: #F4F5F7;
@@ -11,64 +15,102 @@
 		--gray-4: #525252;
 		--green: #D2FFCE;
 
+		--text-base: var(--black);
+		--text-base-inverted: var(--white);
+		--surface-base: var(--white);
+		--surface-inverted: var(--black);
+
+		// Typography
+		--typeface-primary: 'PP Lettra Mono', monospace;
+		--typeface-secondary: 'PP Lettra Mono', monospace;
+
+		// Sizing
+		--sizing-0: 0rem;
+		--sizing-0-0625: 0.0625rem;  /* 1px */
+		--sizing-0-125: 0.125rem;    /* 2px */
+		--sizing-0-25: 0.25rem;      /* 4px */
+		--sizing-0-5: 0.5rem;        /* 8px */
+		--sizing-1: 1rem;            /* 16px */
+		--sizing-1-25: 1.25rem;      /* 20px */
+		--sizing-1-5: 1.5rem;        /* 24px */
+		--sizing-2: 2rem;            /* 32px */
+		--sizing-2-5: 2.5rem;        /* 40px */
+		--sizing-3: 3rem;            /* 48px */
+		--sizing-3-5: 3.5rem;        /* 56px */
+		--sizing-4: 4rem;            /* 64px */
+		--sizing-4-5: 4.5rem;        /* 72px */
+		--sizing-5: 5rem;            /* 80px */
+		--sizing-5-5: 5.5rem;        /* 88px */
+		--sizing-6: 6rem;            /* 96px */
+		--sizing-6-5: 6.5rem;        /* 104px */
+		--sizing-7: 7rem;            /* 112px */
+		--sizing-7-5: 7.5rem;        /* 120px */
+		--sizing-8: 8rem;            /* 128px */
+		--sizing-8-5: 8.5rem;        /* 136px */
+		--sizing-9: 9rem;            /* 144px */
+		--sizing-9-5: 9.5rem;        /* 152px */
+		--sizing-10: 10rem;          /* 160px */
+		--sizing-10-5: 10.5rem;      /* 168px */
+		--sizing-11: 11rem;          /* 176px */
+		--sizing-11-5: 11.5rem;      /* 184px */
+		--sizing-12: 12rem;          /* 192px */
+		--sizing-12-5: 12.5rem;      /* 200px */
+		--sizing-13: 13rem;          /* 208px */
+		--sizing-13-5: 13.5rem;      /* 216px */
+		--sizing-14: 14rem;          /* 224px */
+		--sizing-14-5: 14.5rem;      /* 232px */
+		--sizing-15: 15rem;          /* 240px */
+		--sizing-15-5: 15.5rem;      /* 248px */
+		--sizing-16: 16rem;          /* 256px */
+		--sizing-16-5: 16.5rem;      /* 264px */
+		--sizing-17: 17rem;          /* 272px */
+		--sizing-17-5: 17.5rem;      /* 280px */
+		--sizing-18: 18rem;          /* 288px */
+		--sizing-18-5: 18.5rem;      /* 296px */
+
+		// =============================================
 		// Grid
-		--grid-margin: 26px;
-		--grid-gutter-x: 24px;
-		--grid-gutter-y: 24px;
-		--grid-columns: 4;
+		// =============================================
+		--grid-margin: 15px;
+		--grid-gutter: 15px;
+		--grid-column-count: 4;
 
 		@include media('>medium') {
-			--grid-columns: 12;
+			--grid-column-count: 12;
 			--grid-margin: 60px;
+			--grid-gutter: 20px;
 		}
 
+		// =============================================
 		// Spacing
-		--space-0: 0rem;
-		--space-1: 0.0625rem;  /* 1px */
-		--space-2: 0.125rem;   /* 2px */
-		--space-3: 0.25rem;    /* 4px */
-		--space-4: 0.5rem;     /* 8px */
-		--space-5: 0.75rem;    /* 12px */
-		--space-6: 1rem;       /* 16px */
-		--space-7: 1.25rem;    /* 20px */
-		--space-8: 1.5rem;     /* 24px */
-		--space-9: 2rem;       /* 32px */
-		--space-10: 2.5rem;    /* 40px */
-		--space-11: 3rem;      /* 48px */
-		--space-12: 3.5rem;    /* 56px */
-		--space-13: 4rem;      /* 64px */
-		--space-14: 4.5rem;    /* 72px */
-		--space-15: 5rem;      /* 80px */
-		--space-16: 5.5rem;    /* 88px */
-		--space-17: 6rem;      /* 96px */
-		--space-18: 6.5rem;    /* 104px */
-		--space-19: 7rem;      /* 112px */
-		--space-20: 7.5rem;    /* 120px */
-		--space-21: 8rem;      /* 128px */
-		--space-22: 8.5rem;    /* 136px */
-		--space-23: 9rem;      /* 144px */
-		--space-24: 9.5rem;    /* 152px */
-		--space-25: 10rem;     /* 160px */
-		--space-26: 10.5rem;   /* 168px */
-		--space-27: 11rem;     /* 176px */
-		--space-28: 11.5rem;   /* 184px */
-		--space-29: 12rem;     /* 192px */
-		--space-30: 12.5rem;   /* 200px */
-		--space-31: 13rem;     /* 208px */
-		--space-32: 13.5rem;   /* 216px */
-		--space-33: 14rem;     /* 224px */
-		--space-34: 14.5rem;   /* 232px */
-		--space-35: 15rem;     /* 240px */
-		--space-36: 15.5rem;   /* 248px */
-		--space-37: 16rem;     /* 256px */
-		--space-38: 16.5rem;   /* 264px */
-		--space-39: 17rem;     /* 272px */
-		--space-40: 17.5rem;   /* 280px */
-		--space-41: 18rem;     /* 288px */
-		--space-42: 18.5rem;   /* 296px */
+		// =============================================
+		--space-4xs: var(--sizing-0-0625);
+		--space-2xs: var(--sizing-0-25);
+		--space-xs: var(--sizing-0-5);
+		--space-s: var(--sizing-1);
+		--space-m: var(--sizing-2);
+		--space-l: var(--sizing-3);
+		--space-xl: var(--sizing-4);
+		--space-2xl: var(--sizing-6);
+		--space-3xl: var(--sizing-9);
+		--space-4xl: var(--sizing-12);
 
+		@include media('>medium') {
+			--space-4xs: var(--sizing-0-0625);
+			--space-2xs: var(--sizing-0-25);
+			--space-xs: var(--sizing-0-5);
+			--space-s: var(--sizing-1);
+			--space-m: var(--sizing-2);
+			--space-l: var(--sizing-3);
+			--space-xl: var(--sizing-4);
+			--space-2xl: var(--sizing-6);
+			--space-3xl: var(--sizing-9);
+			--space-4xl: var(--sizing-12);
+		}
 
+		// =============================================
 		// Transitions
+		// =============================================
 		--transition-default-duration: 0.3s;
 		--transition-default-ease: ease;
 		--transition-enter-duration: 0.4s;

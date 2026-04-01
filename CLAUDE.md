@@ -185,8 +185,8 @@ const { title, description } = Astro.props
 
 .s-Name {
 	@include default-side-margin;
-	@include v-spacing(padding-top, var(--space-8), var(--space-12));
-	@include v-spacing(padding-bottom, var(--space-8), var(--space-12));
+	@include v-spacing(padding-top, var(--sizing-1-5), var(--sizing-3-5));
+	@include v-spacing(padding-bottom, var(--sizing-1-5), var(--sizing-3-5));
 
 	&__inner {
 		@include grid-base;

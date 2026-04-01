@@ -7,31 +7,37 @@ export default class CImage extends BaseElement {
 		super({
 			state: {},
 			classes: {
-                isVisible: 'is-visible',
-            },
+				isVisible: 'is-visible',
+				isLoaded: 'is-loaded',
+			},
 			settings: {
 				intersectionOnce: true,
 			},
 			params: {},
 		})
 	}
-	onConnected() {
-		debug.important('c-image connected')
-	}
 
-	onResize(_payload) {
-		// debug.important('c-image onResize', _payload)
+	onConnected() {
+		const img = this.refs.img
+		if (!img) return
+
+		if (img.complete) {
+			this.element.classList.add(this.classes.isLoaded)
+		} else {
+			img.addEventListener('load', this._onLoad = () => {
+				this.element.classList.add(this.classes.isLoaded)
+			}, { once: true })
+		}
 	}
 
 	onDisconnected() {
-		debug.important('c-image disconnected')
+		const img = this.refs.img
+		if (img && this._onLoad) {
+			img.removeEventListener('load', this._onLoad)
+		}
 	}
 
 	onEnter(entry) {
-        this.element.classList.add(this.classes.isVisible)
-	}
-
-	onLeave(entry) {
-		// this.element.classList.remove(this.classes.isVisible)
+		this.element.classList.add(this.classes.isVisible)
 	}
 }

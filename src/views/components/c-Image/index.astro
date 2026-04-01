@@ -1,7 +1,103 @@
 ---
-import { Image } from 'astro:assets';
-import './index.scss';
+/**
+ * c-Image
+ *
+ * Sanity CMS:  <CImage src={sanityImageObject} alt="..." intrinsic />
+ * Astro:       <CImage src={importedImage} alt="..." isAstro />
+ *
+ * Props:
+ * - src          - Sanity image object (with asset._ref) or Astro imported image
+ * - alt          - Alt text (default: '')
+ * - sizes        - Responsive sizes attribute (default: '(min-width: 1024px) 1024px, 100vw')
+ * - widths       - Array of widths for srcset generation (default: [320, 640, 960, 1200, 1800])
+ * - loading      - 'lazy' | 'eager' (default: 'lazy')
+ * - decoding     - 'async' | 'sync' | 'auto' (default: 'async')
+ * - quality      - Image quality 1-100 (default: 70)
+ * - intrinsic    - Use intrinsic aspect ratio wrapper with object-fit: cover (default: false)
+ * - isAstro      - Render with Astro's <Image> instead of Sanity srcset (default: false)
+ * - dataRef      - Value for data-ref attribute (default: '')
+ * - dataAttributes - Array of { name, value } for additional data-* attributes (default: [])
+ */
+
+import { Image } from 'astro:assets'
+import './index.scss'
+
+const {
+	src,
+	alt = '',
+	sizes = '(min-width: 1024px) 1024px, 100vw',
+	widths = [320, 640, 960, 1200, 1800],
+	loading = 'lazy',
+	decoding = 'async',
+	quality = 70,
+	intrinsic = false,
+	isAstro = false,
+	dataRef = '',
+	dataAttributes = [],
+	...rest
+} = Astro.props
+
+let srcset, defaultSrc, intrinsicWidth, intrinsicHeight, ratio, lqip, imgProps, elementProps
+
+if (!isAstro) {
+	const { urlFor } = await import('@lib/imageBuilder.js')
+
+	function buildSrcForWidth(img, w) {
+		return urlFor(img).width(w).auto('format').quality(quality).url()
+	}
+
+	srcset = widths.map((w) => `${buildSrcForWidth(src, w)} ${w}w`).join(', ')
+
+	const defaultWidth = Math.min(Math.max(...widths), 1200)
+	defaultSrc = buildSrcForWidth(src, defaultWidth)
+
+	intrinsicWidth = src?.asset?.metadata?.dimensions?.width ?? undefined
+	intrinsicHeight = src?.asset?.metadata?.dimensions?.height ?? undefined
+	lqip = src?.asset?.metadata?.lqip ?? undefined
+
+	ratio = intrinsicWidth && intrinsicHeight ? Math.floor((intrinsicWidth / intrinsicHeight) * 1000) / 1000 : 1
+
+	imgProps = {
+		src: defaultSrc,
+		srcset,
+		sizes,
+		alt,
+		width: intrinsicWidth,
+		height: intrinsicHeight,
+		loading,
+		decoding,
+		fetchpriority: (loading === 'eager' ? 'high' : 'auto') as 'high' | 'auto',
+	}
+
+	elementProps = {
+		...(dataRef ? { 'data-ref': dataRef } : {}),
+		...dataAttributes.reduce((attrs, attr) => {
+			attrs[`data-${attr.name}`] = attr.value
+			return attrs
+		}, {}),
+		'data-orientation': intrinsicWidth && intrinsicHeight
+			? (intrinsicWidth > intrinsicHeight ? 'landscape' : 'portrait')
+			: 'square',
+	}
+}
+
+const lqipStyle = lqip ? `background-image: url(${lqip}); background-size: cover; background-position: center;` : ''
 ---
+
 <c-image class="c-Image">
-	<Image alt="" {...Astro.props} />
+	{isAstro ? (
+		<div class="c-Image__wrapper">
+			<Image alt={alt} src={src} data-ref="img" {...rest} />
+		</div>
+	) : (
+		intrinsic ? (
+			<div class="c-Image__wrapper c-Image__wrapper--intrinsic" style={`aspect-ratio: ${ratio}; ${lqipStyle}`} {...elementProps}>
+				<img data-ref="img" {...imgProps} />
+			</div>
+		) : (
+			<div class="c-Image__wrapper c-Image__wrapper--static" style={lqipStyle || undefined} {...elementProps}>
+				<img data-ref="img" {...imgProps} />
+			</div>
+		)
+	)}
 </c-image>

@@ -1,7 +1,34 @@
 ---
-const { title, description } = Astro.props;
-import './index.scss';
+/**
+ * c-Text
+ *
+ * Sanity rich text:   <CText src={blockContentArray} />
+ * Sanity plain text:  <CText src="Plain string from Sanity" />
+ * Slot (Astro HTML):  <CText isSlot><p>Content here</p></CText>
+ *
+ * Props:
+ * - src    - Sanity block content array (rich text) or plain string
+ * - isSlot - Render slot content instead of Sanity data (default: false)
+ */
+
+import './index.scss'
+import { PortableText } from 'astro-portabletext'
+
+const {
+	src,
+	isSlot = false,
+} = Astro.props
+
+const isRichText = !isSlot && Array.isArray(src)
+const isPlainText = !isSlot && !isRichText && typeof src === 'string'
 ---
+
 <c-text class="c-Text">
-	<slot />
+	{isSlot ? (
+		<slot />
+	) : isRichText ? (
+		<PortableText value={src} />
+	) : isPlainText ? (
+		<p>{src}</p>
+	) : null}
 </c-text>

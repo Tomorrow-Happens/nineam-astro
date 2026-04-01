@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@barba/prefetch": "^2.2.0",
-    "astro": "^5.15.5"
+    "astro": "^5.15.5",
+    "astro-portabletext": "^0.13.0"
   },
   "devDependencies": {
     "@astrojs/netlify": "^6.6.4",

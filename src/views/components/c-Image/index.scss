@@ -10,4 +10,40 @@
     @include v-spacing(margin-top, var(--sizing-1-5), var(--sizing-1-5));
     @include v-spacing(margin-bottom, var(--sizing-1-5), var(--sizing-1-5));
     @include transition-enter;
+
+    &__wrapper {
+        position: relative;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+            filter: blur(20px);
+        }
+
+        &--intrinsic {
+            img {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &--static {
+            img {
+                position: relative;
+            }
+        }
+    }
+
+    &.is-loaded &__wrapper {
+        img {
+            filter: blur(0);
+        }
+    }
 }

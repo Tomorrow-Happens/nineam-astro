@@ -22,15 +22,8 @@ PREVIEW=false                        # Set to 'true' for draft content
 
 ## Setup
 
-### 1. Copy files to your project
-
-Copy the connector files to your `src/lib` directory:
-
-```bash
-cp connectors/sanity/lib/*.js src/lib/
-```
-
-Or import directly from the connector (update tsconfig paths if needed):
+### 1. Import connector
+Import directly from the connector (update tsconfig paths if needed):
 
 ```json
 {
@@ -47,64 +40,18 @@ Or import directly from the connector (update tsconfig paths if needed):
 ```astro
 ---
 import { getPages, getSiteOptions } from '@connectors/sanity/lib/sanity.js'
-import CImage from '@connectors/sanity/components/c-Image/index.astro'
+import CImage from '@components/c-Image/index.astro'
 
 const pages = await getPages()
 const siteOptions = await getSiteOptions()
 ---
 
-<CImage image={page.featuredImage} alt="Featured" />
-```
-
-## Components
-
-### c-Image
-
-Responsive Sanity image component with automatic srcset generation.
-
-Props:
-- `image` (required) - Sanity image object with asset._ref
-- `alt` - Alt text
-- `sizes` - Responsive sizes attribute
-- `widths` - Array of widths to generate (default: [320, 640, 960, 1200, 1800])
-- `loading` - 'lazy' | 'eager' (default: 'lazy')
-- `quality` - Image quality 1-100 (default: 70)
-- `intrinsic` - Use intrinsic aspect ratio wrapper (default: false)
-
-```astro
-<CImage
-  image={data.image}
-  alt="Description"
-  widths={[400, 800, 1200]}
-  loading="eager"
-  quality={80}
-  intrinsic
-/>
+<CImage src={page.featuredImage} alt="Featured" />
 ```
 
 ## Customizing Queries
 
 Edit `lib/sanity.js` to add your own GROQ queries based on your Sanity schema:
-
-```javascript
-export async function getBlogPosts() {
-  return await client.fetch(
-    `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
-      title,
-      "slug": slug.current,
-      excerpt,
-      featuredImage {
-        asset->{
-          _id,
-          url,
-          metadata { dimensions }
-        }
-      },
-      publishedAt
-    }`
-  )
-}
-```
 
 ## Preview Mode
 

@@ -14,27 +14,27 @@
 	}
 
 	&__title {
-		grid-column: 1 / -1;
+		@include grid-col-full;
 		margin-bottom: var(--sizing-0-5);
 
 		@include media('>medium') {
-			grid-column: 1 / 6;
+			@include grid-col(5);
 		}
 	}
 
 	&__description {
-		grid-column: 1 / -1;
+		@include grid-col-full;
 
 		@include media('>medium') {
-			grid-column: 1 / 6;
+			@include grid-col(5);
 		}
 	}
 
 	&__slot {
-		grid-column: 1 / -1;
+		@include grid-col-full;
 
 		@include media('>medium') {
-			grid-column: 1 / 6;
+			@include grid-col(5);
 		}
 	}
 }

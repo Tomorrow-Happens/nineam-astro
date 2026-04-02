@@ -1,0 +1,10 @@
+---
+const { node } = Astro.props
+const style = node.markDef?.style
+---
+
+{style ? (
+	<span class={style}><slot /></span>
+) : (
+	<slot />
+)}

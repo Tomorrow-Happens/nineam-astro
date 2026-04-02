@@ -13,7 +13,7 @@
  * - loading      - 'lazy' | 'eager' (default: 'lazy')
  * - decoding     - 'async' | 'sync' | 'auto' (default: 'async')
  * - quality      - Image quality 1-100 (default: 70)
- * - intrinsic    - Use intrinsic aspect ratio wrapper with object-fit: cover (default: false)
+ * - intrinsic    - Use intrinsic aspect ratio wrapper with object-fit: cover (default: auto — true when dimensions are available)
  * - isAstro      - Render with Astro's <Image> instead of Sanity srcset (default: false)
  * - dataRef      - Value for data-ref attribute (default: '')
  * - dataAttributes - Array of { name, value } for additional data-* attributes (default: [])
@@ -30,14 +30,14 @@ const {
 	loading = 'lazy',
 	decoding = 'async',
 	quality = 70,
-	intrinsic = false,
+	intrinsic: intrinsicProp,
 	isAstro = false,
 	dataRef = '',
 	dataAttributes = [],
 	...rest
 } = Astro.props
 
-let srcset, defaultSrc, intrinsicWidth, intrinsicHeight, ratio, lqip, imgProps, elementProps
+let srcset, defaultSrc, intrinsicWidth, intrinsicHeight, ratio, lqip, hotspotPosition, intrinsic, imgProps, elementProps
 
 if (!isAstro) {
 	const { urlFor } = await import('@lib/imageBuilder.js')
@@ -57,6 +57,17 @@ if (!isAstro) {
 
 	ratio = intrinsicWidth && intrinsicHeight ? Math.floor((intrinsicWidth / intrinsicHeight) * 1000) / 1000 : 1
 
+	// Default to intrinsic when we have dimensions
+	intrinsic = intrinsicProp !== undefined
+		? intrinsicProp
+		: !!(intrinsicWidth && intrinsicHeight)
+
+	// Translate Sanity hotspot (0–1 coords) to CSS object-position
+	const hotspot = src?.hotspot
+	hotspotPosition = hotspot
+		? `${Math.round(hotspot.x * 100)}% ${Math.round(hotspot.y * 100)}%`
+		: undefined
+
 	imgProps = {
 		src: defaultSrc,
 		srcset,
@@ -67,6 +78,7 @@ if (!isAstro) {
 		loading,
 		decoding,
 		fetchpriority: (loading === 'eager' ? 'high' : 'auto') as 'high' | 'auto',
+		...(hotspotPosition ? { style: `object-position: ${hotspotPosition};` } : {}),
 	}
 
 	elementProps = {
@@ -81,7 +93,7 @@ if (!isAstro) {
 	}
 }
 
-const lqipStyle = lqip ? `background-image: url(${lqip}); background-size: cover; background-position: center;` : ''
+const lqipStyle = lqip ? `background-image: url(${lqip}); background-size: cover; background-position: ${hotspotPosition || 'center'};` : ''
 ---
 
 <c-image class="c-Image">

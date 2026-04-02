@@ -1,0 +1,7 @@
+---
+import CImage from '@components/c-Image/index.astro'
+
+const { node } = Astro.props
+---
+
+<CImage src={node} alt={node.alt || ''} intrinsic />

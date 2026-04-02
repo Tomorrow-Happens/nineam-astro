@@ -13,6 +13,8 @@
 
 import './index.scss'
 import { PortableText } from 'astro-portabletext'
+import TypeStyleMark from './marks/TypeStyleMark.astro'
+import ImageBlock from './types/Image.astro'
 
 const {
 	src,
@@ -21,13 +23,22 @@ const {
 
 const isRichText = !isSlot && Array.isArray(src)
 const isPlainText = !isSlot && !isRichText && typeof src === 'string'
+
+const components = {
+	type: {
+		image: ImageBlock,
+	},
+	mark: {
+		typeStyle: TypeStyleMark,
+	},
+}
 ---
 
 <c-text class="c-Text">
 	{isSlot ? (
 		<slot />
 	) : isRichText ? (
-		<PortableText value={src} />
+		<PortableText value={src} components={components} />
 	) : isPlainText ? (
 		<p>{src}</p>
 	) : null}

@@ -1,6 +1,7 @@
 @use '@css/mixins/_spacing' as *;
 @use '@css/mixins/_transitions' as *;
 @use '@css/mixins/_v-spacing' as *;
+@use '@css/mixins/_ft' as *;
 
 .c-Text {
     border-top: 2px solid currentColor;
@@ -10,4 +11,94 @@
     @include v-spacing(margin-bottom, var(--sizing-1-5), var(--sizing-1-5));
     @include default-side-margin;
     @include transition-enter;
+
+    & > *:first-child {
+        margin-top: 0 !important; // reset margin top
+    }
+
+    // --- Rich text (PortableText) styles ---
+    p {
+        @include v-spacing(margin-bottom, var(--sizing-0-75), var(--sizing-1));
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @include v-spacing(margin-top, var(--sizing-1-25), var(--sizing-2));
+        @include v-spacing(margin-bottom, var(--sizing-0-5), var(--sizing-0-75));
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    strong, b {
+        font-weight: 700;
+    }
+
+    em, i {
+        font-style: italic;
+    }
+
+    u {
+        text-decoration: underline;
+        text-underline-offset: 0.15em;
+    }
+
+    del, s {
+        text-decoration: line-through;
+    }
+
+    code {
+        font-family: var(--typeface-primary);
+        background-color: color-mix(in srgb, currentColor 10%, transparent);
+        padding: 0.15em 0.35em;
+        border-radius: 3px;
+    }
+
+    a {
+        text-decoration: underline;
+        text-underline-offset: 0.15em;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    blockquote {
+        border-left: 2px solid currentColor;
+        @include v-spacing(padding-left, var(--sizing-1), var(--sizing-1-5));
+        @include v-spacing(margin-top, var(--sizing-1), var(--sizing-1-5));
+        @include v-spacing(margin-bottom, var(--sizing-1), var(--sizing-1-5));
+
+        p {
+            @include ft(body-lg);
+        }
+    }
+
+    ul, ol {
+        @include v-spacing(margin-top, var(--sizing-0-75), var(--sizing-1));
+        @include v-spacing(margin-bottom, var(--sizing-0-75), var(--sizing-1));
+        @include v-spacing(padding-left, var(--sizing-1-25), var(--sizing-1-5));
+    }
+
+    ul {
+        list-style-type: disc;
+    }
+
+    ol {
+        list-style-type: decimal;
+    }
+
+    li {
+        @include ft(body);
+        @include v-spacing(margin-bottom, var(--sizing-0-25), var(--sizing-0-5));
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }

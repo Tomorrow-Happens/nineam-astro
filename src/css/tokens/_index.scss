@@ -30,6 +30,7 @@
 		--sizing-0-125: 0.125rem;    /* 2px */
 		--sizing-0-25: 0.25rem;      /* 4px */
 		--sizing-0-5: 0.5rem;        /* 8px */
+		--sizing-0-75: 0.75rem;		 /* 12px */
 		--sizing-1: 1rem;            /* 16px */
 		--sizing-1-25: 1.25rem;      /* 20px */
 		--sizing-1-5: 1.5rem;        /* 24px */
@@ -97,6 +98,7 @@
 
 		@include media('>medium') {
 			--space-4xs: var(--sizing-0-0625);
+			--spacing-3xs: var(--sizing-0-125);
 			--space-2xs: var(--sizing-0-25);
 			--space-xs: var(--sizing-0-5);
 			--space-s: var(--sizing-1);

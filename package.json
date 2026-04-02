@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@barba/prefetch": "^2.2.0",
+    "@sanity/client": "^7.20.0",
+    "@sanity/image-url": "^2.1.1",
     "astro": "^5.15.5",
     "astro-portabletext": "^0.13.0"
   },

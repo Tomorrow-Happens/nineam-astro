@@ -2,40 +2,7 @@
 
 This connector provides Sanity CMS integration for the Nine AM boilerplate.
 
-## Installation
-
-1. Install the required dependencies:
-
-```bash
-npm install @sanity/client @sanity/image-url
-```
-
-2. Add environment variables to your `.env` file:
-
-```env
-SANITY_PROJECT_ID=your-project-id
-SANITY_DATASET=production
-SANITY_API_VERSION=2024-01-01
-SANITY_VIEWER_API_TOKEN=your-token  # Optional: for preview mode
-PREVIEW=false                        # Set to 'true' for draft content
-```
-
-## Setup
-
-### 1. Import connector
-Import directly from the connector (update tsconfig paths if needed):
-
-```json
-{
-  "compilerOptions": {
-    "paths": {
-      "@connectors/*": ["./connectors/*"]
-    }
-  }
-}
-```
-
-### 2. Use in your Astro pages
+### Use in your Astro pages
 
 ```astro
 ---

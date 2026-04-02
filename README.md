@@ -13,21 +13,11 @@ https://nineam.netlify.app
 - **SCSS** - Design tokens, mixins, and CSS layers
 - **Netlify** - Deploy-ready adapter
 
-## Quick Start
-
-```bash
-# Install dependencies
-npm install
-
-# Start dev server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
+## Setup
+- Copy `.env.sample` to `.env` and update
+- Install deps `npm install`
+- Run dev server `npm run dev`
+- Build `npm run build`
 
 ## Project Structure
 
